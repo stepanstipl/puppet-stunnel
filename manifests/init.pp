@@ -1,6 +1,7 @@
 # == Class: stunnel
 #
-# Full description of class stunnel here.
+# This class allows you to install and configure stunnel and manage
+# individual connections.
 #
 # === Parameters
 #
@@ -29,13 +30,34 @@
 #
 # === Authors
 #
-# Author Name <author@domain.com>
+# Stepan Stipl <stepan@stipl.net>
 #
 # === Copyright
 #
-# Copyright 2014 Your name here, unless otherwise noted.
+# Copyright 2014 Stepan Stipl
 #
-class stunnel {
+class stunnel (
+  $ensure          = $stunnel::params::ensure,
+  $package_name    = $stunnel::params::package_name,
+  $package_version = $stunnel::params::package_version,
+  $package_ensure  = $stunnel::params::package_ensure,
+  $service_manage  = $stunnel::params::service_manage,
+  $service_enable  = $stunnel::params::service_enable,
+  $service_ensure  = $stunnel::params::service_ensure,
+) inherits stunnel::params {
 
+  validate_bool($service_manage)
+  validate_bool($service_enable)
+
+  $my_package_ensure = $ensure ? {
+    'present' => $package_version,
+    default => absent
+  }
+
+  anchor {'stunnel::begin': }  ->
+  class {'stunnel::install': } ->
+  class {'stunnel::config': }  ->
+  class {'stunnel::service': } ->
+  anchor {'stunnel::end': }
 
 }
