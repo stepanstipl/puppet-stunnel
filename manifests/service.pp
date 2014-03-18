@@ -12,12 +12,12 @@
 # Copyright 2014 Stepan Stipl
 #
 
-class stunnel::service inherits stunnel {
+class stunnel::service {
 
-  if $service_manage == true {
+  if $stunnel::service_manage == true {
     service { 'stunnel':
-      ensure     => $service_ensure,
-      enable     => $service_enable,
+      ensure     => $stunnel::service_ensure,
+      enable     => $stunnel::service_enable,
       hasstatus  => true,
       hasrestart => true,
     }

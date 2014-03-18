@@ -40,19 +40,45 @@ class stunnel (
   $ensure          = $stunnel::params::ensure,
   $package_name    = $stunnel::params::package_name,
   $package_version = $stunnel::params::package_version,
-  $package_ensure  = $stunnel::params::package_ensure,
   $service_manage  = $stunnel::params::service_manage,
   $service_enable  = $stunnel::params::service_enable,
   $service_ensure  = $stunnel::params::service_ensure,
+  $chroot          = $stunnel::params::chroot,
+  $compression     = $stunnel::params::compression,
+  $debug_level     = $stunnel::params::debug_level,
+  $debug_facility  = $stunnel::params::debug_facility,
+  $fips            = $stunnel::params::fips,
+  $foreground      = $stunnel::params::foreground,
+  $log             = $stunnel::params::log,
+  $output          = $stunnel::params::output,
+  $pid             = $stunnel::params::pid,
+  $service         = $stunnel::params::service,
+  $setgid          = $stunnel::params::setgid,
+  $setuid          = $stunnel::params::setuid,
+  $socket          = $stunnel::params::socket,
+  $syslog          = $stunnel::params::syslog
+
 ) inherits stunnel::params {
 
-  validate_bool($service_manage)
+  validate_string($package_name)
+  validate_string($package_version)
+  validate_re( $ensure, '^(present|absent)$')
   validate_bool($service_enable)
-
-  $my_package_ensure = $ensure ? {
-    'present' => $package_version,
-    default => absent
-  }
+  validate_bool($service_ensure)
+  validate_string($chroot)
+  validate_re($compression, ['^(deflate|zlib|rle)$', ''])
+  validate_string($debug_level)
+  validate_string($debug_facility)
+  validate_bool($fips)
+  validate_bool($foreground)
+  validate_re($log, ['^(append|overwrite)$'])
+  validate_absolute_path($output)
+  validate_absolute_path($pid)
+  validate_string($service)
+  validate_string($setgid)
+  validate_string($setuid)
+  validate_string($socket)
+  validate_bool($syslog)
 
   anchor {'stunnel::begin': }  ->
   class {'stunnel::install': } ->

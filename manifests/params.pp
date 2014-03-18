@@ -13,13 +13,29 @@
 
 class stunnel::params {
 
-  $service_manage  = true
-  $service_enable  = true
-  $service_running = true
-  $service_ensure  = true
+  $ensure          = 'present'
 
   $package_name    = 'stunnel'
   $package_version = 'latest'
-  $ensure          = 'present'
+
+  $service_manage  = true
+  $service_enable  = true
+  $service_ensure  = true
+
+  # stunnel global options
+  $chroot          = ''
+  $compression     = ''
+  $debug_level     = ''
+  $debug_facility  = ''
+  $fips            = false
+  $foreground      = false
+  $log             = 'append'
+  $output          = '/var/log/stunnel.log'
+  $pid             = '/var/run/stunnel.pid'
+  $service         = 'stunnel'
+  $setgid          = ''
+  $setuid          = ''
+  $socket          = ''
+  $syslog          = true
 
 }

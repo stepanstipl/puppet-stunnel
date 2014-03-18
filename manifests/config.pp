@@ -12,6 +12,14 @@
 # Copyright 2014 Stepan Stipl
 #
 
-class stunnel::config inherits stunnel {
+class stunnel::config {
+
+  if !empty($stunnel::debug_level) {
+    if !empty($stunnel::debug_facility) {
+      $debug = "${stunnel::debug_facility}.${stunnel::debug_level}"
+    } else {
+      $debug = $stunnel::debug_level
+    }
+  }
 
 }

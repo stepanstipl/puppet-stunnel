@@ -12,10 +12,15 @@
 # Copyright 2014 Stepan Stipl
 #
 
-class stunnel::install inherits stunnel {
+class stunnel::install {
+
+  $my_package_ensure = $stunnel::ensure ? {
+    'present' => $stunnel::package_version,
+    default => absent
+  }
 
   package { 'stunnel':
     ensure => $my_package_ensure,
-    name   => $package_name,
+    name   => $stunnel::package_name,
   }
 }
