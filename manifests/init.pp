@@ -43,6 +43,7 @@ class stunnel (
   $service_manage  = $stunnel::params::service_manage,
   $service_enable  = $stunnel::params::service_enable,
   $service_ensure  = $stunnel::params::service_ensure,
+  $purge_config    = $stunnel::params::purge_config,
   $chroot          = $stunnel::params::chroot,
   $compression     = $stunnel::params::compression,
   $debug_level     = $stunnel::params::debug_level,
@@ -52,7 +53,6 @@ class stunnel (
   $log             = $stunnel::params::log,
   $output          = $stunnel::params::output,
   $pid             = $stunnel::params::pid,
-  $service         = $stunnel::params::service,
   $setgid          = $stunnel::params::setgid,
   $setuid          = $stunnel::params::setuid,
   $socket          = $stunnel::params::socket,
@@ -65,6 +65,7 @@ class stunnel (
   validate_re( $ensure, '^(present|absent)$')
   validate_bool($service_enable)
   validate_bool($service_ensure)
+  validate_bool($purge_config)
   validate_string($chroot)
   validate_re($compression, ['^(deflate|zlib|rle)$', ''])
   validate_string($debug_level)
@@ -74,7 +75,6 @@ class stunnel (
   validate_re($log, ['^(append|overwrite)$'])
   validate_absolute_path($output)
   validate_absolute_path($pid)
-  validate_string($service)
   validate_string($setgid)
   validate_string($setuid)
   validate_string($socket)

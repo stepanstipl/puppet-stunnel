@@ -22,6 +22,8 @@ class stunnel::params {
   $service_enable  = true
   $service_ensure  = true
 
+  $purge_config    = true
+
   # stunnel global options
   $chroot          = ''
   $compression     = ''
@@ -32,7 +34,6 @@ class stunnel::params {
   $log             = 'append'
   $output          = '/var/log/stunnel.log'
   $pid             = '/var/run/stunnel.pid'
-  $service         = 'stunnel'
   $setgid          = ''
   $setuid          = ''
   $socket          = ''
