@@ -24,9 +24,10 @@ class stunnel::config {
 
   if $stunnel::purge_config {
     if !defined(Resource['stunnel_config']) {
-      resources { 'stunnel_config'
+      resources { 'stunnel_config':
         purge => true
       }
+    }
   }
 
   # Take care of individual config settings
@@ -57,34 +58,37 @@ class stunnel::config {
     }
   }
 
+  $fips_value = $stunnel::fips ? {
+    true  => 'yes',
+    false => 'no'
+  }
   stunnel_config { 'stunnel-fips':
     ensure  => present,
     section => '',
     setting => 'fips',
-    value   => $stunnel::fips ? {
-      true  => 'yes',
-      false => 'no' 
-    }
+    value   => $fips_value
   }
 
+  $foreground_value = $stunnel::foreground ? {
+    true  => 'yes',
+    false => 'no'
+  }
   stunnel_config { 'stunnel-foreground':
     ensure  => present,
     section => '',
     setting => 'foreground',
-    value   => $stunnel::foreground ? {
-      true  => 'yes',
-      false => 'no'
-    }
+    value   => $foreground_value
   }
-  
+
+  $syslog_value = $stunnel::syslog ? {
+    true  => 'yes',
+    false => 'no'
+  }
   stunnel_config { 'stunnel-syslog':
     ensure  => present,
     section => '',
     setting => 'syslog',
-    value   => $stunnel::syslog ? {
-      true  => 'yes',
-      false => 'no'
-    }
+    value   => $stunnel_value
   }
 
   if !$stunnel::syslog {
@@ -100,7 +104,7 @@ class stunnel::config {
       section => '',
       setting => 'output',
       value   => $stunnel::output
-    }     
+    }
   }
 
   stunnel_config { 'stunnel-pid':

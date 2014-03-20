@@ -1,5 +1,4 @@
 require 'rake'
-#require 'rspec/core/rake_task'
 require 'puppet-lint/tasks/puppet-lint'
 require 'puppetlabs_spec_helper/rake_tasks'
 
@@ -7,10 +6,6 @@ PuppetLint.configuration.send('with-filename')
 PuppetLint.configuration.send('fail-on-warnings')
 PuppetLint.configuration.send('disable_class_inherits_from_params_class')
 PuppetLint.configuration.ignore_paths = ["spec/**/*.pp", "pkg/**/*.pp"]
-
-# RSpec::Core::RakeTask.new(:spec) do |t|
-#  t.pattern = 'spec/*/*_spec.rb'
-# end
 
 desc "Check manifests, templates and ruby files for syntax errors."
 task :validate do
