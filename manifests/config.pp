@@ -88,7 +88,7 @@ class stunnel::config {
     ensure  => present,
     section => '',
     setting => 'syslog',
-    value   => $stunnel_value
+    value   => $syslog_value
   }
 
   if !$stunnel::syslog {

@@ -56,47 +56,41 @@ define stunnel::tun (
   $transparent = 'none',
   $verify = 'default' ) {
 
-  validate_re($servicename, '^[a-zA-Z- ]$')
+  validate_service($servicename, '^[a-zA-Z- ]$')
 
-  unless (empty($accept_host) or is_ip_address($accept_host)) {
-    validate_re($accept_host, [ '^[a-zA-Z0-9.-]$', '^::$' ] )
+  unless empty($accept_host) {
+    validate_host($accept_host)
   }
 
-  unless (emoty($accept_port) {
-    validate_re($accept_port, '^a-zA-Z0-9-_$'
+  unless empty($accept_port) {
+    validate_port($accept_port)
   }
 
-    validate_string($ca_path)
+  validate_string($ca_path)
 
-    validate_string($ca_file)
+  validate_string($ca_file)
 
   unless empty ($cert) {
     validate_absolute_path($cert)
   }
 
-    validate_string($ciphers)
+  validate_string($ciphers)
 
   validate_bool ($client)
 
   validate_string($crl_path)
-  
+
   validate_string($crl_file)
-  
-  unless empty ($connect) {
-    if is_array($connect) {
-      $connect.each |$val| {
-        validate_re($val, '^[a-zA-Z0-9.-:]$')
-      } else {
-        validate_re($connect, '^[a-zA-Z0-9.-:]$')
-      }
-    }
+
+  unless empty($connect) {
+    validate_host_service($connect)
   }
 
   validate_string($curve)
 
   validate_bool($delay)
 
-  validate_re($failover.'^(rr|prio)$')
+  validate_re($failover,'^(rr|prio)$')
 
   validate_string($ident)
 
@@ -106,8 +100,8 @@ define stunnel::tun (
 
   validate_bool($libwrap)
 
-  unless ( empty($local) or is_ip_address($local) ) {
-    validate_re($local,'^[a-zA-Z0-9.-]')
+  unless empty($local) {
+    validate_host($local)
   }
 
   validate_string($options)
@@ -120,12 +114,8 @@ define stunnel::tun (
     validate_re($protocol_authentication, '^(basic|ntlm)$')
   }
 
-  unless ( empty($protocol_host) or is_ip_address($protocol_host) ) {
-    validate_re($protocol_host,'^[a-zA-Z0-9.-]$')
-  }
-
-  unless empty($protocol_port) {
-    validate_re($protocol_port,'^[a-zA-Z0-9-]$')
+  unless empty($protocol_host) {
+    validate_host_service($protocol_host)
   }
 
   validate_string($protocol_password)
@@ -135,11 +125,7 @@ define stunnel::tun (
   validate_bool($pty)
 
   unless empty($redirect_host) {
-    validate_re($redirect_host,'^[a-zA-Z0-9.-]$')
-  }
-
-  unless empty($redirect_port) {
-    validate_re($redirect_port,'^[a-zA-Z0-9-]$')
+    validate_host_service($redirect_host)
   }
 
   validate_bool($renegotiation)
@@ -147,23 +133,21 @@ define stunnel::tun (
   validate_bool($reset)
 
   unless empty($session_cache_size) {
-    validatee_re($session_cache_size,'^[0-9]$')
+    validatee_re($session_cache_size,'^[0-9]+$')
   }
 
-    unless empty($session_cache_timeout) {
-          validatee_re($session_cache_timeout,'^[0-9]$')
-            }
-
-  unless empty($seddiond_host) {
-    validate_re($seddiond_host,'^[a-zA-Z0-9.-]$')
+  unless empty($session_cache_timeout) {
+    validatee_re($session_cache_timeout,'^[0-9]+$')
   }
 
-  unless empty($seddiond_port) {
-    validate_re($seddiond_port,'^[a-zA-Z0-9-]$')
+  unless empty($sessiond_host) {
+    validate_re($sessiond_host,'^[a-zA-Z0-9.-]$')
   }
 
+  unless empty($sessiond_port) {
+    validate_re($sessiond_port,'^[a-zA-Z0-9-]$')
+  }
 
   require stunnel
 
-  
 }

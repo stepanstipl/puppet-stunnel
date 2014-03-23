@@ -7,21 +7,18 @@ module Puppet::Parser::Functions
     ENDHEREDOC
   ) do |args|
 
-    
-  
     args.each do |arg|
       unless arg.is_a?(String)
         raise Puppet::ParseError, "#{arg.inspect} is not a string."
       end
 
-    Puppet::Parser::Functions.autoloader.load(:is_ip_address) \
-      unless Puppet::Parser::Functions.autoloader.loaded?(:is_ip_address)
+      Puppet::Parser::Functions.autoloader.load(:is_ip_address) \
+        unless Puppet::Parser::Functions.autoloader.loaded?(:is_ip_address)
 
-      unless is_ip_address($arg)?
+      unless is_ip_address(arg)
         raise Puppet::ParseError, "#{arg.inspect} is not a valid IP address."
-     end
+      end
     end
 
   end
-
 end
