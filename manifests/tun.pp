@@ -49,7 +49,8 @@ define stunnel::tun (
   $timeout_connect = '',
   $timeout_idle = '',
   $transparent = 'none',
-  $verify = 'default' ) {
+  $verify = 'default'
+) {
 
   validate_re($servicename, '^[a-zA-Z- ]$')
 
@@ -59,7 +60,7 @@ define stunnel::tun (
     validate_string($ca_path)
   }
 
-  unless empty ($ca_file)
+  unless empty ($ca_file) {
     validate_string($ca_file)
   }
 
@@ -147,6 +148,7 @@ define stunnel::tun (
 
     if empty($key) {
       fail('When running in server mode, $key needs to be set.')
+    }
   }
 
   $client_value = $client ? {
@@ -451,7 +453,5 @@ define stunnel::tun (
       value   => $transparent
     }
   }
-
-
 
 }
