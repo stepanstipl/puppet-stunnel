@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 puppetversion = ENV.key?('PUPPET_VERSION') ? ENV['PUPPET_VERSION'] : ['>= 3.2']
-rakeversion = ENV.key?('RAKE_VERSION') ? ENV['RAKE_VERSION'] : ['~= 10.1']
+rakeversion = ENV.key?('RAKE_VERSION') ? ENV['RAKE_VERSION'] : ['~> 10.1']
 
 group :developmens, :test do
   gem 'rake', rakeversion,       :require => false
