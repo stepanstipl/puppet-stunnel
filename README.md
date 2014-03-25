@@ -14,3 +14,5 @@ TODO
 - Add support to handle cert files directly
 - Add support for GPG decrypt stuff
 - Review initfile
+- Puppet forge publish script
+- Ad proped stdlib dependency

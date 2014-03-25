@@ -1,6 +1,7 @@
-pkg/
 .DS_Store
 coverage/
+pkg/
 spec/fixtures/
 Gemfile.lock
 .bundle/
+.svn
