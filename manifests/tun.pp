@@ -135,7 +135,7 @@ define stunnel::tun (
   }
 
   unless empty($sessiond) {
-    validate_host_service($sessiond_port)
+    validate_host_service($sessiond)
   }
 
   require stunnel
