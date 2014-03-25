@@ -13,3 +13,4 @@ TODO
 - Add support for missing parameters
 - Add support to handle cert files directly
 - Add support for GPG decrypt stuff
+- Review initfile

@@ -22,5 +22,14 @@ class stunnel::install {
   package { 'stunnel':
     ensure => $my_package_ensure,
     name   => $stunnel::package_name,
+  } ->
+
+  file {'/etc/init.d/stunnel':
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0755',
+    source  => 'puppet:///modules/stunnel/stunnel.init',
+    replace => $stunnel::init_overwrite
   }
+
 }

@@ -22,6 +22,8 @@ class stunnel::params {
   $service_enable  = true
   $service_ensure  = true
 
+  $init_overwrite  = false
+
   $purge_config    = true
 
   # stunnel global options

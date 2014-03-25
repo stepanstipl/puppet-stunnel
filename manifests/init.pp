@@ -43,6 +43,7 @@ class stunnel (
   $service_manage  = $stunnel::params::service_manage,
   $service_enable  = $stunnel::params::service_enable,
   $service_ensure  = $stunnel::params::service_ensure,
+  $init_overwrite  = $stunnel::params::init_overwrite,
   $purge_config    = $stunnel::params::purge_config,
   $chroot          = $stunnel::params::chroot,
   $compression     = $stunnel::params::compression,
@@ -65,6 +66,8 @@ class stunnel (
   validate_re( $ensure, '^(present|absent)$')
   validate_bool($service_enable)
   validate_bool($service_ensure)
+  validate_bool($service_manage)
+  validate_bool($init_overwrite)
   validate_bool($purge_config)
   validate_string($chroot)
   validate_re($compression, ['^(deflate|zlib|rle)$', ''])
