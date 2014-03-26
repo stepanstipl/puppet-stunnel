@@ -5,6 +5,11 @@ puppet-stunnel
 
 Puppet module stepanstipl-stunnel for installing and configuring stunnel
 
+Requirements
+------------
+- Puppet > 3.0
+- Puppetlabs stdlib > 3.1
+
 TODO
 ----
 - Write rspec unit tests
